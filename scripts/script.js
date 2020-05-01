@@ -5,47 +5,26 @@ const url = "https://www.iwillfearnoevil.com/screen/string.txt"; //Set url to va
 
 var storedText="";
 var newString;
-var topThree;
+var finale;
 
 fetch(proxyurl + url)
   .then(r => r.text()) 
     .then( d => {
       storedText = d;
-      FindTheThree();
+      FindTheThree(storedText, finale);
 })
 
-
-
-function FindTheThree(storedText) {
-   console.log(storedText);
-   var newString = storedText.split("\n");
+function FindTheThree(storedText,finale){
+   newString = storedText.split("\n");
     for(var i = 0; i < newString.length; i++){
       newString[i] = parseInt(newString[i]);
     }
-  console.log(newString);
   newString.sort();
+  newString.sort((a,b)=>a-b);
   console.log(newString);
-
-for (var k = 0; k < newString.length; k++) {
-    var target = newString[k];
-    for (var j = k - 1; j >= 0 && (newString[j] > target); j--) {
-        newString[j+1] = newString[j];
+  for(var x = 0;x<=newString.length;x++){
+    if(typeof newString[x] == "number" && newString[x]!=NaN){
+      finale.push(newString[x])
     }
-    newString[j+1] = target
-}
-console.log(newString);
-
-  for(var z = 0; z <= newString; z++){
-    if(newString[z]!=newString[z + 1]){
-      topThree=topThree.push(newString[z]);
-    }
-    console.log(topThree);
   }
-
 }
-
-
-
-
-
-  
